@@ -10,3 +10,12 @@ Funcionalidades:
 - Edição de Markdown com preview instantâneo.
 - Contagem de palavras e caracteres.
 - Exportação para PDF sem servidor.
+
+## Tecnologias
+- React + Vite + TypeScript
+- @uiw/react-md-editor
+- markdown-pdfjs
+- Vitest + React Testing Library
+- Playwright
+- GitHub Actions
+- Vercel
