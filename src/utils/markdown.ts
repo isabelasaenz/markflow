@@ -26,3 +26,11 @@ export function toggleBold(text: string): string {
 export function toggleItalic(text: string): string {
   return `*${text}*`;
 }
+
+export function insertLink(text: string, url: string): string {
+  return `[${text}](${url})`;
+}
+
+export function toggleCode(text: string): string {
+  return `\`${text}\``;
+}

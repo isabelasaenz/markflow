@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown, toggleItalic, toggleBold } from '../src/utils/markdown';
+import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown, toggleItalic, toggleBold, insertLink, toggleCode } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -76,5 +76,23 @@ describe('toggleItalic', () => {
   });
   it('funciona com texto contendo espaços', () => {
     expect(toggleItalic('duas palavras')).toBe('*duas palavras*');
+  });
+});
+
+describe('insertLink', () => {
+  it('cria link Markdown com texto e URL', () => {
+    expect(insertLink('Google', 'https://google.com')).toBe('[Google](https://google.com)');
+  });
+  it('funciona com URL vazia', () => {
+    expect(insertLink('texto', '')).toBe('[texto]()');
+  });
+});
+
+describe('toggleCode', () => {
+  it('envolve o texto em crases', () => {
+    expect(toggleCode('const x = 1')).toBe('`const x = 1`');
+  });
+  it('funciona com texto vazio', () => {
+    expect(toggleCode('')).toBe('``');
   });
 });
