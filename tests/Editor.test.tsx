@@ -4,6 +4,19 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Editor } from '../src/components/Editor';
 
+vi.mock('@uiw/react-md-editor', () => ({
+  default: ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
+    <div>
+      <textarea
+        aria-label="markdown editor"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
+      <div>{value.replace(/^#\s*/, '').replace(/<script>.*?<\/script>/gi, '')}</div>
+    </div>
+  ),
+}));
+
 describe('Editor', () => {
   it('renderiza a área de edição', () => {
     render(<Editor value="" onChange={() => {}} />);

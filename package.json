@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "postinstall": "node scripts/fix-markdown-pdfjs.mjs"
   },
   "dependencies": {
     "@uiw/react-md-editor": "^4.2.4",
