@@ -6,7 +6,7 @@ export default function App() {
   const [markdown, setMarkdown] = useState('# Meu Documento\n\nComece a escrever...');
   return (
     <div className="app-container">
-      <Toolbar markdown={markdown} />
+      <Toolbar onExportPDF={() => { } } markdown={''} />
       <h1 className="app-title">MarkFlow</h1>
       <Editor value={markdown} onChange={setMarkdown} />
     </div>
