@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { countWords } from '../src/utils/markdown';
+import { countCharacters } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -15,3 +16,16 @@ describe('countWords', () => {
     expect(countWords('Olá, mundo!')).toBe(2);
   });
 });
+
+describe('countCharacters', () => {
+  it('retorna 0 para string vazia', () => {
+    expect(countCharacters('')).toBe(0);
+  });
+  it('conta caracteres incluindo espaços', () => {
+    expect(countCharacters('abc def')).toBe(7);
+  });
+  it('conta caracteres unicode', () => {
+    expect(countCharacters('ação')).toBe(4);
+  });
+});
+
