@@ -19,4 +19,12 @@ describe('Editor', () => {
     await userEvent.type(screen.getByRole('textbox'), 'a');
     expect(onChange).toHaveBeenCalled();
   });
+  it('renderiza o preview do markdown', () => {
+    render(<Editor value="# Título" onChange={() => {}} />);
+    expect(screen.getByText('Título')).toBeInTheDocument();
+  });
+  it('não renderiza tags script no preview', () => {
+    render(<Editor value="<script>alert(1)</script>ok" onChange={() => {}} />);
+    expect(screen.queryByText('alert(1)')).not.toBeInTheDocument();
+  });
 });
