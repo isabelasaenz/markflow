@@ -19,3 +19,10 @@ Funcionalidades:
 - Playwright
 - GitHub Actions
 - Vercel
+
+## Uso de IA
+O GitHub Copilot foi utilizado principalmente para:
+- Sugerir a estrutura inicial de componentes React, devido a falta de familiaridade com desenvolvimento de sistemas web.
+- Auxiliar na escrita dos testes de unidade e e2e.
+- Revisar a configuração do GitHub Actions e do Vitest.
+Todo o código foi revisado e adaptado pela equipe.
