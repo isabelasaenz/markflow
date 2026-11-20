@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countWords } from '../src/utils/markdown';
-import { countCharacters } from '../src/utils/markdown';
-import { countHeadings } from '../src/utils/markdown';
+import { countWords, extractTitle, countCharacters, countHeadings } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -42,3 +40,14 @@ describe('countHeadings', () => {
   });
 });
 
+describe('extractTitle', () => {
+  it('extrai título de heading nível 1', () => {
+    expect(extractTitle('# Meu Título\nconteúdo')).toBe('Meu Título');
+  });
+  it('retorna fallback quando não há heading', () => {
+    expect(extractTitle('sem título')).toBe('Documento sem título');
+  });
+  it('ignora headings de outros níveis', () => {
+    expect(extractTitle('## Subtítulo')).toBe('Documento sem título');
+  });
+});
