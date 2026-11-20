@@ -1,5 +1,5 @@
 declare module 'markdown-pdfjs' {
-  export interface MarkdownPDFOptions {
+  export interface PDFOptions {
     filename?: string;
     css?: string;
     header?: string;
@@ -7,10 +7,7 @@ declare module 'markdown-pdfjs' {
     [key: string]: unknown;
   }
 
-  export const MarkdownPDF: {
-    download: (markdown: string, options?: MarkdownPDFOptions) => void;
-  };
-
-  export function download(markdown: string, options?: MarkdownPDFOptions): void;
-  export function render(markdown: string, element: HTMLElement, options?: MarkdownPDFOptions): void;
+  export function download(markdown: string, options?: PDFOptions): Promise<void>;
+  export function downloadFromElement(element: HTMLElement, options?: PDFOptions): Promise<void>;
+  export function render(markdown: string, element: HTMLElement, options?: PDFOptions): Promise<void>;
 }

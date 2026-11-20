@@ -4,7 +4,7 @@ import { exportToPDF } from '../src/utils/pdf';
 const downloadMock = vi.hoisted(() => vi.fn());
 
 vi.mock('markdown-pdfjs', () => ({
-  MarkdownPDF: { download: downloadMock },
+  download: downloadMock,
 }));
 
 describe('exportToPDF', () => {

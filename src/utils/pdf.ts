@@ -1,5 +1,5 @@
-import { MarkdownPDF } from 'markdown-pdfjs';
+import { download } from 'markdown-pdfjs';
 
 export function exportToPDF(markdown: string, filename = 'documento.pdf') {
-  MarkdownPDF.download(markdown, { filename });
+  download(markdown, { filename });
 }
