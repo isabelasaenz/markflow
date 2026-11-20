@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { countWords } from '../src/utils/markdown';
 import { countCharacters } from '../src/utils/markdown';
+import { countHeadings } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -26,6 +27,18 @@ describe('countCharacters', () => {
   });
   it('conta caracteres unicode', () => {
     expect(countCharacters('ação')).toBe(4);
+  });
+});
+
+describe('countHeadings', () => {
+  it('retorna 0 sem headings', () => {
+    expect(countHeadings('texto normal')).toBe(0);
+  });
+  it('conta heading de nível 1', () => {
+    expect(countHeadings('# Título')).toBe(1);
+  });
+  it('conta múltiplos headings', () => {
+    expect(countHeadings('# A\n## B\n### C')).toBe(3);
   });
 });
 
