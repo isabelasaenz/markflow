@@ -20,6 +20,12 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run test:coverage
+      - name: Instalar navegadores do Playwright
+        if: matrix.os == 'ubuntu-latest'
+        run: npx playwright install --with-deps chromium
+      - name: Executar testes E2E
+        if: matrix.os == 'ubuntu-latest'
+        run: npx playwright test
       - name: Upload coverage
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@v4
