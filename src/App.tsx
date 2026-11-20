@@ -6,10 +6,11 @@ import './App.css'
 import { Editor } from './components/Editor';
 
 function App() {
+  const [markdown, setMarkdown] = useState('Escreva aqui...');
   return (
     <div className="app-container">
       <h1 className="app-title">MarkFlow</h1>
-      <Editor />
+      <Editor value={markdown} onChange={setMarkdown} />
     </div>
   );
 }
