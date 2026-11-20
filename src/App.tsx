@@ -6,8 +6,8 @@ import './App.css'
 
 function App() {
   return (
-    <div>
-      <h1>MarkFlow</h1>
+    <div className="app-container">
+      <h1 className="app-title">MarkFlow</h1>
     </div>
   );
 }
