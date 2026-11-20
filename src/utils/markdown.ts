@@ -14,3 +14,7 @@ export function extractTitle(markdown: string): string {
   const match = markdown.match(/^#\s+(.+)$/m);
   return match ? match[1].trim() : 'Documento sem título';
 }
+
+export function sanitizeMarkdown(markdown: string): string {
+  return markdown.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gi, '');
+}

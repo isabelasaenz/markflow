@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countWords, extractTitle, countCharacters, countHeadings } from '../src/utils/markdown';
+import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -49,5 +49,14 @@ describe('extractTitle', () => {
   });
   it('ignora headings de outros níveis', () => {
     expect(extractTitle('## Subtítulo')).toBe('Documento sem título');
+  });
+});
+
+describe('sanitizeMarkdown', () => {
+  it('remove tags script', () => {
+    expect(sanitizeMarkdown('<script>alert("xss")</script>texto')).toBe('texto');
+  });
+  it('não altera texto normal', () => {
+    expect(sanitizeMarkdown('**negrito**')).toBe('**negrito**');
   });
 });
