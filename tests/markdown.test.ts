@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown } from '../src/utils/markdown';
+import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown, toggleItalic, toggleBold } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -58,5 +58,23 @@ describe('sanitizeMarkdown', () => {
   });
   it('não altera texto normal', () => {
     expect(sanitizeMarkdown('**negrito**')).toBe('**negrito**');
+  });
+});
+
+describe('toggleBold', () => {
+  it('envolve o texto em asteriscos duplos', () => {
+    expect(toggleBold('texto')).toBe('**texto**');
+  });
+  it('funciona com texto vazio', () => {
+    expect(toggleBold('')).toBe('****');
+  });
+});
+
+describe('toggleItalic', () => {
+  it('envolve o texto em asteriscos simples', () => {
+    expect(toggleItalic('texto')).toBe('*texto*');
+  });
+  it('funciona com texto contendo espaços', () => {
+    expect(toggleItalic('duas palavras')).toBe('*duas palavras*');
   });
 });

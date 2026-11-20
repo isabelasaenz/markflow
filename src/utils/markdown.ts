@@ -18,3 +18,11 @@ export function extractTitle(markdown: string): string {
 export function sanitizeMarkdown(markdown: string): string {
   return markdown.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gi, '');
 }
+
+export function toggleBold(text: string): string {
+  return `**${text}**`;
+}
+
+export function toggleItalic(text: string): string {
+  return `*${text}*`;
+}
