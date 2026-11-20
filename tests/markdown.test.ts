@@ -14,6 +14,9 @@ describe('countWords', () => {
   it('conta palavras com pontuação', () => {
     expect(countWords('Olá, mundo!')).toBe(2);
   });
+  it('ignora quebras de linha', () => {
+  expect(countWords('uma\nduas\ntrês')).toBe(3);
+});
 });
 
 describe('countCharacters', () => {
