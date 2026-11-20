@@ -1,4 +1,5 @@
 import MDEditor from '@uiw/react-md-editor';
+import { sanitizeMarkdown } from '../utils/markdown';
 
 interface EditorProps {
   value: string;
@@ -6,9 +7,12 @@ interface EditorProps {
 }
 
 export function Editor({ value, onChange }: EditorProps) {
+  const handleChange = (val?: string) => {
+    onChange(sanitizeMarkdown(val || ''));
+  };
   return (
     <div data-color-mode="light">
-      <MDEditor value={value} onChange={(val) => onChange(val || '')} height={400} />
+      <MDEditor value={value} onChange={handleChange} height={400} />
     </div>
   );
 }
