@@ -290,3 +290,41 @@ body {
 .app-dark .btn-cancel:hover {
   background: #4a5568;
 }
+
+/* ─── Responsividade ──────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .app-main {
+    padding: 12px;
+  }
+
+  .toolbar-item,
+  .toolbar-separator {
+    display: none;
+  }
+
+  .toolbar {
+    gap: 8px;
+  }
+
+  .btn-new,
+  .btn-export {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: unset;
+  }
+
+  .confirm-box {
+    margin: 0 16px;
+  }
+}
