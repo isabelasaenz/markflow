@@ -15,9 +15,18 @@ function loadFromStorage(): string {
   }
 }
 
+const THEME_KEY = 'markflow-theme';
+
 export default function App() {
   const [markdown, setMarkdown] = useState(loadFromStorage);
   const [exporting, setExporting] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    try {
+      return (localStorage.getItem(THEME_KEY) as 'light' | 'dark') ?? 'light';
+    } catch {
+      return 'light';
+    }
+  });
 
   useEffect(() => {
     try {
@@ -31,6 +40,18 @@ export default function App() {
     document.title = `${extractTitle(markdown)} – MarkFlow`;
   }, [markdown]);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      // localStorage indisponível
+    }
+  }, [theme]);
+
+  function handleToggleTheme() {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  }
+
   function handleExportPDF() {
     setExporting(true);
     const ok = exportToPDF(markdown);
@@ -39,14 +60,16 @@ export default function App() {
   }
 
   return (
-    <div className="app-container">
+    <div className={`app-container app-${theme}`}>
       <Toolbar
           onExportPDF={handleExportPDF}
           markdown={markdown}
           exporting={exporting}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
       <h1 className="app-title">MarkFlow</h1>
-      <Editor value={markdown} onChange={setMarkdown} />
+      <Editor value={markdown} onChange={setMarkdown} theme={theme} />
     </div>
   );
 }

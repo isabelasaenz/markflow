@@ -35,3 +35,22 @@ body {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
 }
+
+/* Tema escuro */
+.app-dark {
+  background: #1a202c;
+  min-height: 100vh;
+}
+
+.app-dark .app-title {
+  color: #e2e8f0;
+}
+
+.app-dark .toolbar {
+  color: #a0aec0;
+}
+
+[data-color-mode="dark"] .w-md-editor {
+  border: 1px solid #4a5568;
+  border-radius: 8px;
+}
