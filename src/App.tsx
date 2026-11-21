@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Editor } from './components/Editor';
 import { Toolbar } from './components/Toolbar';
 import { ConfirmDialog } from './components/ConfirmDialog';
+import { Toast } from './components/Toast';
 import { exportToPDF } from './utils/pdf';
 import { extractTitle } from './utils/markdown';
 
@@ -22,6 +23,7 @@ export default function App() {
   const [markdown, setMarkdown] = useState(loadFromStorage);
   const [exporting, setExporting] = useState(false);
   const [confirmingNew, setConfirmingNew] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
       return (localStorage.getItem(THEME_KEY) as 'light' | 'dark') ?? 'light';
@@ -70,7 +72,7 @@ export default function App() {
   function handleExportPDF() {
     setExporting(true);
     const ok = exportToPDF(markdown);
-    if (!ok) alert('Não foi possível exportar o PDF. Tente novamente.');
+    if (!ok) setErrorMessage('Não foi possível exportar o PDF. Tente novamente.');
     setExporting(false);
   }
 
@@ -96,6 +98,9 @@ export default function App() {
           onConfirm={handleConfirmNew}
           onCancel={handleCancelNew}
         />
+      )}
+      {errorMessage && (
+        <Toast message={errorMessage} onClose={() => setErrorMessage(null)} />
       )}
     </div>
   );
