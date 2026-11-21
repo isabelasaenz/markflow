@@ -75,17 +75,21 @@ export default function App() {
   }
 
   return (
-    <div className={`app-container app-${theme}`}>
-      <Toolbar
-        onExportPDF={handleExportPDF}
-        onNewDocument={handleNewDocument}
-        markdown={markdown}
-        exporting={exporting}
-        theme={theme}
-        onToggleTheme={handleToggleTheme}
-      />
-      <h1 className="app-title">MarkFlow</h1>
-      <Editor value={markdown} onChange={setMarkdown} theme={theme} />
+    <div className={`app-root app-${theme}`}>
+      <header className="app-header">
+        <span className="app-logo">MarkFlow</span>
+        <Toolbar
+          onExportPDF={handleExportPDF}
+          onNewDocument={handleNewDocument}
+          markdown={markdown}
+          exporting={exporting}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
+        />
+      </header>
+      <main className="app-main">
+        <Editor value={markdown} onChange={setMarkdown} theme={theme} />
+      </main>
       {confirmingNew && (
         <ConfirmDialog
           message="Criar novo documento? O conteúdo atual será perdido."

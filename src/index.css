@@ -2,45 +2,148 @@
   box-sizing: border-box;
 }
 
-body {
+html, body, #root {
+  height: 100%;
   margin: 0;
+}
+
+body {
   font-family: system-ui, sans-serif;
-  background: #f5f5f5;
 }
 
-.w-md-editor {
-  padding: 4px;
+/* ─── Layout ─────────────────────────────────────────── */
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f0f2f5;
 }
 
-.app-container {
-  padding: 32px 24px;
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 56px;
+  background: #1a202c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.app-title {
-  color: #2d3748;
-  margin-bottom: 16px;
+.app-logo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
 }
+
+.app-main {
+  margin-top: 56px;
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Toolbar ─────────────────────────────────────────── */
 
 .toolbar {
   display: flex;
-  gap: 16px;
-  margin-bottom: 12px;
   align-items: center;
-  font-size: 14px;
-  color: #4a5568;
+  gap: 12px;
+}
+
+.toolbar-item {
+  font-size: 13px;
+  color: #a0aec0;
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 20px;
+  background: #2d3748;
+}
+
+/* ─── Botões ──────────────────────────────────────────── */
+
+.btn-theme {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.btn-theme:hover {
+  background: #2d3748;
+}
+
+.btn-new {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid #4a5568;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-new:hover {
+  background: #2d3748;
+  border-color: #718096;
+}
+
+.btn-export {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #4299e1;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-export:hover:not(:disabled) {
+  background: #3182ce;
+}
+
+.btn-export:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─── Editor ──────────────────────────────────────────── */
+
+.w-md-editor {
+  border-radius: 8px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 [data-color-mode="light"] .w-md-editor {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border: 1px solid #e2e8f0 !important;
 }
 
-/* ConfirmDialog */
+[data-color-mode="dark"] .w-md-editor {
+  border: 1px solid #2d3748 !important;
+}
+
+/* ─── ConfirmDialog ───────────────────────────────────── */
+
 .confirm-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,17 +152,18 @@ body {
 
 .confirm-box {
   background: #fff;
-  border-radius: 8px;
-  padding: 24px;
-  max-width: 360px;
+  border-radius: 10px;
+  padding: 28px;
+  max-width: 380px;
   width: 100%;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .confirm-message {
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   font-size: 15px;
   color: #2d3748;
+  line-height: 1.5;
 }
 
 .confirm-actions {
@@ -69,13 +173,14 @@ body {
 }
 
 .btn-cancel {
-  padding: 6px 16px;
+  padding: 7px 16px;
   border-radius: 6px;
   border: 1px solid #e2e8f0;
   background: #fff;
   color: #4a5568;
   cursor: pointer;
   font-size: 14px;
+  transition: background 0.15s;
 }
 
 .btn-cancel:hover {
@@ -83,34 +188,46 @@ body {
 }
 
 .btn-confirm {
-  padding: 6px 16px;
+  padding: 7px 16px;
   border-radius: 6px;
   border: none;
   background: #e53e3e;
   color: #fff;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s;
 }
 
 .btn-confirm:hover {
   background: #c53030;
 }
 
-/* Tema escuro */
+/* ─── Tema escuro ─────────────────────────────────────── */
+
 .app-dark {
-  background: #1a202c;
-  min-height: 100vh;
+  background: #171923;
 }
 
-.app-dark .app-title {
+.app-dark .app-main {
   color: #e2e8f0;
 }
 
-.app-dark .toolbar {
-  color: #a0aec0;
+.app-dark .confirm-box {
+  background: #1a202c;
+  border: 1px solid #2d3748;
 }
 
-[data-color-mode="dark"] .w-md-editor {
-  border: 1px solid #4a5568;
-  border-radius: 8px;
+.app-dark .confirm-message {
+  color: #e2e8f0;
+}
+
+.app-dark .btn-cancel {
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #e2e8f0;
+}
+
+.app-dark .btn-cancel:hover {
+  background: #4a5568;
 }

@@ -12,8 +12,8 @@ export function Editor({ value, onChange, theme = 'light' }: EditorProps) {
     onChange(sanitizeMarkdown(val || ''));
   };
   return (
-    <div data-color-mode={theme}>
-      <MDEditor value={value} onChange={handleChange} height={400} />
+    <div data-color-mode={theme} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <MDEditor value={value} onChange={handleChange} height="100%" style={{ flex: 1 }} />
     </div>
   );
 }
