@@ -32,7 +32,13 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <Toolbar onExportPDF={() => exportToPDF(markdown)} markdown={markdown} />
+      <Toolbar
+          onExportPDF={() => {
+            const ok = exportToPDF(markdown);
+            if (!ok) alert('Não foi possível exportar o PDF. Tente novamente.');
+          }}
+          markdown={markdown}
+        />
       <h1 className="app-title">MarkFlow</h1>
       <Editor value={markdown} onChange={setMarkdown} />
     </div>
