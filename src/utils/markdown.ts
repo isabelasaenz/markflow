@@ -35,3 +35,8 @@ export function insertLink(text: string, url: string): string {
 export function toggleCode(text: string): string {
   return `\`${text}\``;
 }
+
+export function estimateReadingTime(text: string): number {
+  const words = countWords(text);
+  return Math.max(1, Math.ceil(words / 200));
+}

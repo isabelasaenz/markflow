@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown, toggleItalic, toggleBold, insertLink, toggleCode } from '../src/utils/markdown';
+import { countWords, extractTitle, countCharacters, countHeadings, sanitizeMarkdown, toggleItalic, toggleBold, insertLink, toggleCode, estimateReadingTime } from '../src/utils/markdown';
 
 describe('countWords', () => {
   it('retorna 0 para string vazia', () => {
@@ -97,5 +97,26 @@ describe('toggleCode', () => {
   });
   it('funciona com texto vazio', () => {
     expect(toggleCode('')).toBe('``');
+  });
+});
+
+describe('estimateReadingTime', () => {
+  it('retorna 1 para texto vazio', () => {
+    expect(estimateReadingTime('')).toBe(1);
+  });
+  it('retorna 1 para texto com menos de 200 palavras', () => {
+    expect(estimateReadingTime('palavra '.repeat(100).trim())).toBe(1);
+  });
+  it('retorna 1 para exatamente 200 palavras', () => {
+    expect(estimateReadingTime('palavra '.repeat(200).trim())).toBe(1);
+  });
+  it('retorna 2 para 201 palavras', () => {
+    expect(estimateReadingTime('palavra '.repeat(201).trim())).toBe(2);
+  });
+  it('retorna 2 para 400 palavras', () => {
+    expect(estimateReadingTime('palavra '.repeat(400).trim())).toBe(2);
+  });
+  it('retorna 3 para 401 palavras', () => {
+    expect(estimateReadingTime('palavra '.repeat(401).trim())).toBe(3);
   });
 });

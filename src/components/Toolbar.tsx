@@ -1,4 +1,4 @@
-import { countWords, countCharacters } from '../utils/markdown';
+import { countWords, countCharacters, estimateReadingTime } from '../utils/markdown';
 
 interface ToolbarProps {
   markdown: string;
@@ -13,6 +13,7 @@ export function Toolbar({ markdown, onExportPDF, exporting = false, theme = 'lig
     <div className="toolbar">
       <span className="toolbar-item">Palavras: {countWords(markdown)}</span>
       <span className="toolbar-item">Caracteres: {countCharacters(markdown)}</span>
+      <span className="toolbar-item">Leitura: {estimateReadingTime(markdown)} min</span>
       <button onClick={onToggleTheme} className="btn-theme" aria-label="Alternar tema">
         {theme === 'light' ? '🌙' : '☀️'}
       </button>
