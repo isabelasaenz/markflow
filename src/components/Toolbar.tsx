@@ -22,7 +22,7 @@ export function Toolbar({ markdown, onExportPDF, onNewDocument, exporting = fals
       <button onClick={onNewDocument} className="btn-new">
         Novo
       </button>
-      <button onClick={onExportPDF} className="btn-export" disabled={exporting}>
+      <button onClick={onExportPDF} className="btn-export" disabled={exporting} title="Exportar PDF (Ctrl+Shift+E)">
         {exporting ? 'Exportando...' : 'Exportar PDF'}
       </button>
     </div>

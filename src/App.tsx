@@ -52,6 +52,17 @@ export default function App() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+        e.preventDefault();
+        handleExportPDF();
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [markdown]);
+
   function handleNewDocument() {
     setConfirmingNew(true);
   }

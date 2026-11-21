@@ -80,4 +80,10 @@ describe('App', () => {
     expect(() => render(<App />)).not.toThrow();
     vi.restoreAllMocks();
   });
+
+  it('exporta PDF ao pressionar Ctrl+Shift+E', () => {
+    render(<App />);
+    fireEvent.keyDown(window, { key: 'E', ctrlKey: true, shiftKey: true });
+    expect(exportToPDF).toHaveBeenCalled();
+  });
 });
