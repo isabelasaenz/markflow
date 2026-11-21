@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from '../src/App';
 import { exportToPDF } from '../src/utils/pdf';
 
@@ -27,6 +27,10 @@ vi.mock('../src/utils/pdf', () => ({
 }));
 
 describe('App', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   it('compartilha o estado do editor com a toolbar', () => {
     render(<App />);
 
