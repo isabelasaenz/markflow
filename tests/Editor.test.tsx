@@ -40,4 +40,8 @@ describe('Editor', () => {
     render(<Editor value="<script>alert(1)</script>ok" onChange={() => {}} />);
     expect(screen.queryByText('alert(1)')).not.toBeInTheDocument();
   });
+  it('aplica data-color-mode dark quando theme é dark', () => {
+    const { container } = render(<Editor value="" onChange={() => {}} theme="dark" />);
+    expect(container.querySelector('[data-color-mode="dark"]')).toBeInTheDocument();
+  });
 });

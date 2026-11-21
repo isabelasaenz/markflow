@@ -67,4 +67,17 @@ describe('App', () => {
 
     expect(screen.getByTestId('toolbar-markdown')).toHaveTextContent('conteúdo editado');
   });
+
+  it('usa conteúdo padrão quando localStorage lança exceção na leitura', () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('bloqueado'); });
+    render(<App />);
+    expect(screen.getByTestId('toolbar-markdown')).toHaveTextContent('# Meu Documento');
+    vi.restoreAllMocks();
+  });
+
+  it('não lança exceção quando localStorage lança erro ao salvar', () => {
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('bloqueado'); });
+    expect(() => render(<App />)).not.toThrow();
+    vi.restoreAllMocks();
+  });
 });
