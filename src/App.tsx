@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Editor } from './components/Editor';
 import { Toolbar } from './components/Toolbar';
 import { exportToPDF } from './utils/pdf';
+import { extractTitle } from './utils/markdown';
 
 const STORAGE_KEY = 'markflow-content';
 const DEFAULT_CONTENT = '# Meu Documento\n\nComece a escrever...';
@@ -23,6 +24,10 @@ export default function App() {
     } catch {
       // localStorage indisponível (ex.: modo privado bloqueado)
     }
+  }, [markdown]);
+
+  useEffect(() => {
+    document.title = `${extractTitle(markdown)} – MarkFlow`;
   }, [markdown]);
 
   return (
