@@ -14,8 +14,14 @@ O MarkFlow é um editor de Markdown que permite escrever, visualizar o preview e
 Funcionalidades:
 
 - Edição de Markdown com preview instantâneo.
-- Contagem de palavras e caracteres.
-- Exportação para PDF sem servidor.
+- Contagem de palavras, caracteres e estimativa de tempo de leitura.
+- Exportação para PDF sem servidor (`Ctrl+Shift+E`).
+- Persistência automática do conteúdo no `localStorage`.
+- Alternância entre tema claro e escuro.
+- Botão de novo documento com confirmação inline.
+- Título da aba do navegador sincronizado com o `# heading` do documento.
+- Notificações de erro via toast.
+- Interface responsiva para mobile.
 
 ## Tecnologias
 
