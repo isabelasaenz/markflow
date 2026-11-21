@@ -17,6 +17,7 @@ function loadFromStorage(): string {
 
 export default function App() {
   const [markdown, setMarkdown] = useState(loadFromStorage);
+  const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
     try {
@@ -30,14 +31,19 @@ export default function App() {
     document.title = `${extractTitle(markdown)} – MarkFlow`;
   }, [markdown]);
 
+  function handleExportPDF() {
+    setExporting(true);
+    const ok = exportToPDF(markdown);
+    if (!ok) alert('Não foi possível exportar o PDF. Tente novamente.');
+    setExporting(false);
+  }
+
   return (
     <div className="app-container">
       <Toolbar
-          onExportPDF={() => {
-            const ok = exportToPDF(markdown);
-            if (!ok) alert('Não foi possível exportar o PDF. Tente novamente.');
-          }}
+          onExportPDF={handleExportPDF}
           markdown={markdown}
+          exporting={exporting}
         />
       <h1 className="app-title">MarkFlow</h1>
       <Editor value={markdown} onChange={setMarkdown} />
