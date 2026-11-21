@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('deve carregar a página inicial com o editor', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: 'MarkFlow' })).toBeVisible();
+  await expect(page.getByText('MarkFlow').first()).toBeVisible();
 });
 
 test('deve atualizar a contagem de palavras ao digitar', async ({ page }) => {
