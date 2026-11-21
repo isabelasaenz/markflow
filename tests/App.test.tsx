@@ -14,10 +14,11 @@ vi.mock('../src/components/Editor', () => ({
 }));
 
 vi.mock('../src/components/Toolbar', () => ({
-  Toolbar: ({ markdown, onExportPDF }: { markdown: string; onExportPDF: () => void }) => (
+  Toolbar: ({ markdown, onExportPDF, onNewDocument }: { markdown: string; onExportPDF: () => void; onNewDocument: () => void }) => (
     <div>
       <span data-testid="toolbar-markdown">{markdown}</span>
       <button onClick={onExportPDF}>Exportar PDF</button>
+      <button onClick={onNewDocument}>Novo</button>
     </div>
   ),
 }));
@@ -45,5 +46,25 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Exportar PDF' }));
 
     expect(exportToPDF).toHaveBeenCalledWith('# Meu Documento\n\nComece a escrever...');
+  });
+
+  it('reseta o documento ao confirmar novo', () => {
+    render(<App />);
+
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'conteúdo editado' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Novo' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Confirmar' }));
+
+    expect(screen.getByTestId('toolbar-markdown')).toHaveTextContent('# Meu Documento');
+  });
+
+  it('não reseta o documento ao cancelar confirmação', () => {
+    render(<App />);
+
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'conteúdo editado' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Novo' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
+
+    expect(screen.getByTestId('toolbar-markdown')).toHaveTextContent('conteúdo editado');
   });
 });

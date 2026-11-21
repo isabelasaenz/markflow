@@ -3,12 +3,13 @@ import { countWords, countCharacters, estimateReadingTime } from '../utils/markd
 interface ToolbarProps {
   markdown: string;
   onExportPDF: () => void;
+  onNewDocument?: () => void;
   exporting?: boolean;
   theme?: 'light' | 'dark';
   onToggleTheme?: () => void;
 }
 
-export function Toolbar({ markdown, onExportPDF, exporting = false, theme = 'light', onToggleTheme }: ToolbarProps) {
+export function Toolbar({ markdown, onExportPDF, onNewDocument, exporting = false, theme = 'light', onToggleTheme }: ToolbarProps) {
   return (
     <div className="toolbar">
       <span className="toolbar-item">Palavras: {countWords(markdown)}</span>
@@ -16,6 +17,9 @@ export function Toolbar({ markdown, onExportPDF, exporting = false, theme = 'lig
       <span className="toolbar-item">Leitura: {estimateReadingTime(markdown)} min</span>
       <button onClick={onToggleTheme} className="btn-theme" aria-label="Alternar tema">
         {theme === 'light' ? '🌙' : '☀️'}
+      </button>
+      <button onClick={onNewDocument} className="btn-new">
+        Novo
       </button>
       <button onClick={onExportPDF} className="btn-export" disabled={exporting}>
         {exporting ? 'Exportando...' : 'Exportar PDF'}
