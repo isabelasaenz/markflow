@@ -86,4 +86,10 @@ describe('App', () => {
     fireEvent.keyDown(window, { key: 'E', ctrlKey: true, shiftKey: true });
     expect(exportToPDF).toHaveBeenCalled();
   });
+
+  it('exibe indicador de salvo após edição', () => {
+    render(<App />);
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'novo conteúdo' } });
+    expect(screen.getByText('✓ Salvo')).toBeInTheDocument();
+  });
 });

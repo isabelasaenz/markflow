@@ -24,6 +24,7 @@ export default function App() {
   const [exporting, setExporting] = useState(false);
   const [confirmingNew, setConfirmingNew] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try {
       return (localStorage.getItem(THEME_KEY) as 'light' | 'dark') ?? 'light';
@@ -35,6 +36,9 @@ export default function App() {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, markdown);
+      setSaved(true);
+      const timer = setTimeout(() => setSaved(false), 2000);
+      return () => clearTimeout(timer);
     } catch {
       // localStorage indisponível (ex.: modo privado bloqueado)
     }
@@ -91,6 +95,7 @@ export default function App() {
     <div className={`app-root app-${theme}`}>
       <header className="app-header">
         <span className="app-logo">MarkFlow</span>
+        {saved && <span className="app-saved">✓ Salvo</span>}
         <Toolbar
           onExportPDF={handleExportPDF}
           onNewDocument={handleNewDocument}
